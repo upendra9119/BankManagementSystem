@@ -1,6 +1,6 @@
 package com.bms.model;
 
-public class customer {
+public class Customer {
 
     private String customerName;
     private int customerId;
@@ -8,7 +8,7 @@ public class customer {
 
 
     //constructor
-    public customer(String customerName, int customerId, String customerAddress) {
+    public Customer(String customerName, int customerId, String customerAddress) {
         this.customerName = customerName;
         this.customerId = customerId;
         this.customerAddress = customerAddress;

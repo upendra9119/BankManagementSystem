@@ -1,4 +1,4 @@
-package com.bms.model;
+package com.bms.model.account;
 
 //why we made Accound class as an abstract class
 /*The Account class is created as abstract because we are using it as a base class that will define common behavior and properties for all types of accounts, but it doesn't make sense to instantiate it directly. The abstract keyword ensures that we cannot create objects of the Account class directly, and it allows us to define abstract methods (like calculateInterest()) that must be implemented by concrete subclasses of Account.
@@ -26,7 +26,35 @@ public abstract class Account {
         this.balance = balance;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+    public long getAccountNumber() {
+        return accountNumber;
+    }
 
     public abstract double calculateIntrest();
 
+    public double deposit(double deposit) {
+
+        if(deposit>0){
+            balance += deposit;
+            System.out.println("deposit amount: "+deposit + " balance: "+balance);
+        }
+        else{
+            System.out.println("Invalid deposit");
+        }
+        return balance;
+
+    }
+    public void withdraw(double withdraw){
+        if(withdraw>0 && withdraw<balance){
+            balance -=withdraw;
+            System.out.println("withdraw amount: "+withdraw + " balance: "+balance);
+        }
+        else{
+            System.out.println("Invalid withdraw");
+        }
+
+    }
 }
