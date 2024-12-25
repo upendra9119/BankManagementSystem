@@ -1,4 +1,4 @@
-package com.bms.model;
+package com.bms.model.Customer;
 
 public class Customer {
 
@@ -40,7 +40,7 @@ public class Customer {
 
     //to string method
 
-    public String tostring(){
+    public String toString(){
         return "customerName: " +customerName + ", customerId: " + customerId + ", customerAddress: " + customerAddress;
 
     }

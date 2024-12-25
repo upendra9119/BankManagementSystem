@@ -17,13 +17,20 @@ Without making Account abstract, we could potentially create a generic Account c
 Since Account is meant to be a general representation of an account, and we don’t want users to create a generic "Account" object directly (because it doesn’t represent a real account without more specific details like interest rates or account types), we make the class abstract. */
 
 
+import com.bms.model.Transaction.Transaction;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Account {
     private long accountNumber;
     private double balance;
+    private List<Transaction> transactionhistory;
 
     public Account(long accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
+        this.transactionhistory = new ArrayList<>();
     }
 
     public double getBalance() {
@@ -33,13 +40,26 @@ public abstract class Account {
         return accountNumber;
     }
 
+    protected void addTransaction(Transaction transaction) {
+        transactionhistory.add(transaction);
+    }
+
     public abstract double calculateIntrest();
+
+
+
 
     public double deposit(double deposit) {
 
-        if(deposit>0){
+        if(deposit>0) {
             balance += deposit;
-            System.out.println("deposit amount: "+deposit + " balance: "+balance);
+            System.out.println("deposit amount: " + deposit + " balance: " + balance);
+            transactionhistory.add(new Transaction("TRNX" + System.currentTimeMillis(),  // Unique transaction ID
+                    "Deposit",                            // Transaction type
+                    deposit,                              // Amount deposited
+                    balance                               // Updated balance
+            ));
+            //System.out.println(transactionhistory);
         }
         else{
             System.out.println("Invalid deposit");
@@ -47,14 +67,38 @@ public abstract class Account {
         return balance;
 
     }
-    public void withdraw(double withdraw){
-        if(withdraw>0 && withdraw<balance){
-            balance -=withdraw;
-            System.out.println("withdraw amount: "+withdraw + " balance: "+balance);
-        }
-        else{
+
+
+
+    public void withdraw(double withdraw) {
+        if (withdraw > 0 && withdraw < balance) {
+            balance -= withdraw;
+            System.out.println("withdraw amount: " + withdraw + " balance: " + balance);
+            transactionhistory.add(new Transaction("Tranx" + System.currentTimeMillis(),
+                    "withdraw",
+                    withdraw,
+                    balance));
+            //System.out.println(transactionhistory);
+            //displayTransaction();
+
+        } else {
             System.out.println("Invalid withdraw");
         }
 
     }
+
+
+
+    public void displayTransaction() {
+        if (transactionhistory.isEmpty()) { // Checks if the transaction history is empty
+            System.out.println("No transactions yet");
+        } else {
+            System.out.println("Transaction History: ");
+            // Loop through each transaction and print it
+            for (Transaction transaction : transactionhistory) {
+                System.out.println(transaction); // Ensure transaction has a valid toString() implementation
+            }
+        }
+    }
+
 }
