@@ -31,6 +31,9 @@ public class CurrentAccount extends Account {
 
 
     }
+    public String toString() {
+        return "Account number : " +getAccountNumber()+ ", Current Balance: " +getBalance() ;
+    }
 
     @Override
     public double calculateIntrest() {

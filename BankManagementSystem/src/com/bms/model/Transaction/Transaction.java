@@ -35,6 +35,7 @@ public class Transaction {
         this.timestamp = LocalDateTime.now();
     }
 
+
     public String toString() {
         return "transactionId=" + transactionId + ", transactionType=" + transactionType + ", amount=" + amount + ", postbalance=" + postbalance + ", timestamp=" + timestamp;
     }

@@ -9,6 +9,9 @@ public class SavingsAccount extends Account {
        this.intrestRate = intrestRate;
 
     }
+    public String toString() {
+        return "Account number" +getAccountNumber()+ ",balance "+getBalance()+ ",intrest rate "+intrestRate;
+    }
     @Override
     public double calculateIntrest() {
 

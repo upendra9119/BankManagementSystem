@@ -17,6 +17,7 @@ Without making Account abstract, we could potentially create a generic Account c
 Since Account is meant to be a general representation of an account, and we don’t want users to create a generic "Account" object directly (because it doesn’t represent a real account without more specific details like interest rates or account types), we make the class abstract. */
 
 
+import com.bms.model.Customer.Customer;
 import com.bms.model.Transaction.Transaction;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public abstract class Account {
     private long accountNumber;
     private double balance;
     private List<Transaction> transactionhistory;
+    private List<Customer> customer;
 
     public Account(long accountNumber, double balance) {
         this.accountNumber = accountNumber;
@@ -43,6 +45,7 @@ public abstract class Account {
     protected void addTransaction(Transaction transaction) {
         transactionhistory.add(transaction);
     }
+
 
     public abstract double calculateIntrest();
 
@@ -99,6 +102,45 @@ public abstract class Account {
                 System.out.println(transaction); // Ensure transaction has a valid toString() implementation
             }
         }
+    }
+
+    public long TotalDeposits(){
+
+        long totaldeposits =0;
+        for( Transaction transaction : transactionhistory){
+            //long sum=0;
+            if(transaction.getTransactionType().equals("Deposit")){
+                totaldeposits+=transaction.getAmount();
+            }
+            /*else{
+                System.out.println("Invalid transaction type");
+            }*/
+
+        }
+        return totaldeposits;
+
+    }
+
+    public long TotalWithdrawals(){
+        long totalwithdrawals =0;
+        for( Transaction transaction : transactionhistory){
+            if(transaction.getTransactionType().equals("withdraw")){
+                totalwithdrawals+=transaction.getAmount();
+            }
+            /*else{
+                System.out.println("Invalid transaction type");
+
+            }*/
+
+        }
+        return totalwithdrawals;
+    }
+    public long totalTransactions(){
+        return transactionhistory.size();
+    }
+    public String getAccountType(){
+        return this.getClass().getSimpleName();
+
     }
 
 }
